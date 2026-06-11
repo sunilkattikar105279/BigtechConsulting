@@ -1,0 +1,14 @@
+{
+  "name": "bigtechconsulting",
+  "version": "1.0.0",
+  "description": "BigtechConsulting — AI Business Transformation. Powered by SIXXAB AI.",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve public -p 3000",
+    "build": "echo 'Static site — no build step required'",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vercel Deployment Plan — BigtechConsulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --midnight:#0A0E1A;--amber:#EF9F27;--amber-light:#FDF3E3;--amber-dark:#854F0B;
+  --blue:#1A56FF;--blue-light:#E8EDFF;--chalk:#F5F5F0;--white:#FFFFFF;
+  --ink:#1A1E2E;--muted:#5A6180;--border:#E4E6F0;
+  --success:#0F6E56;--success-light:#E1F5EE;
+  --code-bg:#0F1629;--r:10px;--rl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;color:var(--ink);background:var(--chalk);-webkit-font-smoothing:antialiased;}
+
+/* COVER */
+.cover{background:var(--midnight);padding:64px;min-height:88vh;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.cover-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(26,86,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(26,86,255,.05) 1px,transparent 1px);background-size:48px 48px;}
+.cover-glow{position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(239,159,39,.07),transparent 65%);}
+.cover-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.brand{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:white;}
+.brand em{font-style:normal;color:var(--amber);}
+.doc-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.cover-main{position:relative;z-index:1;max-width:800px;}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(239,159,39,.12);border:1px solid rgba(239,159,39,.25);color:var(--amber);border-radius:40px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;}
+.cover h1{font-family:'Syne',sans-serif;font-size:clamp(44px,5.5vw,76px);font-weight:800;color:white;letter-spacing:-3px;line-height:1.0;margin-bottom:20px;}
+.cover h1 em{font-style:normal;color:var(--amber);}
+.cover-sub{font-size:18px;color:rgba(255,255,255,.5);line-height:1.65;max-width:580px;margin-bottom:48px;}
+.cover-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.cs{display:flex;flex-direction:column;gap:3px;}
+.cs-n{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:white;letter-spacing:-1px;}
+.cs-n em{font-style:normal;color:var(--amber);}
+.cs-l{font-size:12px;color:rgba(255,255,255,.35);}
+.cover-bottom{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.cover-bottom p{font-size:12px;color:rgba(255,255,255,.25);}
+
+/* LAYOUT */
+.page{max-width:880px;margin:0 auto;padding:64px;}
+.sec-header{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.sec-num{display:inline-flex;align-items:center;gap:10px;margin-bottom:12px;}
+.sec-badge{background:var(--midnight);color:var(--amber);font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;padding:6px 12px;border-radius:7px;}
+.sec-status{font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;}
+.status-ready{background:var(--success-light);color:var(--success);}
+.status-action{background:var(--amber-light);color:var(--amber-dark);}
+.status-info{background:var(--blue-light);color:#0F3ACC;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--midnight);letter-spacing:-1.2px;line-height:1.1;margin-bottom:10px;}
+.sec-sub{font-size:15px;color:var(--muted);}
+
+/* CODE BLOCKS */
+pre{background:var(--code-bg);border-radius:var(--rl);padding:24px 28px;margin:20px 0;overflow-x:auto;border:1px solid rgba(255,255,255,.06);}
+code{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;}
+pre code{color:#E2E8F0;}
+.cmd{color:var(--amber);}
+.comment{color:rgba(255,255,255,.3);}
+.str{color:#9FE1CB;}
+.key{color:#AFA9EC;}
+.val{color:#EF9F27;}
+.inline-code{font-family:'JetBrains Mono',monospace;font-size:12px;background:#EEF0F8;color:#1A1E2E;padding:2px 8px;border-radius:5px;}
+
+/* STEPS */
+.step-list{display:flex;flex-direction:column;gap:0;}
+.step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);}
+.step:last-child{border-bottom:none;}
+.step-marker{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;}
+.step-circle{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:white;flex-shrink:0;}
+.step-circle.amber{background:var(--amber);}
+.step-circle.green{background:var(--success);}
+.step-body h4{font-size:16px;font-weight:700;color:var(--midnight);margin-bottom:6px;margin-top:6px;}
+.step-body p{font-size:14px;color:var(--muted);line-height:1.65;}
+.step-body .note{font-size:13px;color:var(--amber-dark);background:var(--amber-light);border-radius:7px;padding:10px 14px;margin-top:10px;display:flex;gap:8px;}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0;}
+.card{background:white;border:1px solid var(--border);border-radius:var(--rl);padding:24px;}
+.card.dark{background:var(--midnight);border-color:transparent;}
+.card.green-border{border-color:var(--success);border-width:2px;}
+.card h4{font-size:15px;font-weight:700;color:var(--midnight);margin-bottom:6px;}
+.card.dark h4{color:white;}
+.card p{font-size:13px;color:var(--muted);line-height:1.6;}
+.card.dark p{color:rgba(255,255,255,.5);}
+.card-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--blue);letter-spacing:-1px;margin-bottom:4px;}
+
+/* TABLES */
+.table{width:100%;border-collapse:collapse;background:white;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);margin:20px 0;}
+.table th{background:var(--midnight);color:rgba(255,255,255,.6);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:12px 16px;text-align:left;}
+.table td{padding:12px 16px;font-size:13px;color:var(--ink);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;}
+.table tr:last-child td{border-bottom:none;}
+.table tr:hover td{background:#FAFAFA;}
+
+/* CALLOUTS */
+.callout{border-left:3px solid var(--amber);background:var(--amber-light);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:16px 0;}
+.callout p{font-size:14px;color:var(--amber-dark);line-height:1.6;}
+.callout.blue{border-color:var(--blue);background:var(--blue-light);}
+.callout.blue p{color:#0F3ACC;}
+.callout.green{border-color:var(--success);background:var(--success-light);}
+.callout.green p{color:var(--success);}
+
+/* FILE TREE */
+.tree{background:var(--code-bg);border-radius:var(--rl);padding:24px 28px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9;margin:20px 0;border:1px solid rgba(255,255,255,.06);}
+.tree .dir{color:var(--amber);}
+.tree .file{color:#9FE1CB;}
+.tree .note{color:rgba(255,255,255,.3);}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:white;border:1px solid var(--border);border-radius:var(--r);}
+.check-item.done{background:var(--success-light);border-color:rgba(15,110,86,.2);}
+.check-box{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+.check-item.done .check-box{background:var(--success);border-color:var(--success);}
+.check-item.done .check-box::after{content:'✓';color:white;font-size:12px;font-weight:700;}
+.check-label{font-size:14px;color:var(--ink);}
+.check-item.done .check-label{color:var(--success);}
+.check-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* DOMAIN */
+.dns-row{display:grid;grid-template-columns:100px 80px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center;}
+.dns-row:last-child{border-bottom:none;}
+.dns-type{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--blue);background:var(--blue-light);padding:3px 8px;border-radius:5px;text-align:center;}
+.dns-host{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--midnight);}
+.dns-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+
+/* DIVIDERS */
+hr{border:none;border-top:1px solid var(--border);margin:56px 0;}
+.section-break{background:white;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 64px;}
+.section-break-inner{max-width:880px;margin:0 auto;}
+
+/* FOOTER */
+.doc-footer{background:var(--midnight);padding:36px 64px;}
+.df-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.df-inner p{font-size:12px;color:rgba(255,255,255,.3);}
+
+@media(max-width:768px){
+  .cover{padding:36px 24px;}
+  .cover h1{letter-spacing:-2px;}
+  .page{padding:40px 24px;}
+  .section-break{padding:40px 24px;}
+  .doc-footer{padding:32px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-grid"></div><div class="cover-glow"></div>
+  <div class="cover-top">
+    <span class="brand">Bigtech<em>Consulting</em></span>
+    <span class="doc-label">Vercel Deployment Plan</span>
+  </div>
+  <div class="cover-main">
+    <div class="cover-badge">⚡ Production Deployment Guide</div>
+    <h1>Deploy to<br/><em>Vercel</em><br/>in 15 Min.</h1>
+    <p class="cover-sub">Complete step-by-step deployment plan for BigtechConsulting.com — from zero to live with custom domain, SSL, CDN, and performance optimization.</p>
+    <div class="cover-stats">
+      <div class="cs"><span class="cs-n">28<em>+</em></span><span class="cs-l">Pages deployed</span></div>
+      <div class="cs"><span class="cs-n">15<em>min</em></span><span class="cs-l">Time to live</span></div>
+      <div class="cs"><span class="cs-n">99<em>%</em></span><span class="cs-l">Uptime SLA (Vercel)</span></div>
+      <div class="cs"><span class="cs-n">Free<em>*</em></span><span class="cs-l">Hobby tier available</span></div>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <p>BigtechConsulting × SIXXAB AI · Deployment Plan v1.0 · June 2026</p>
+    <p>For: sunilkattikar105279 · GitHub repo: github.com/sunilkattikar105279/sixab</p>
+  </div>
+</div>
+
+<!-- S1: PRE-FLIGHT -->
+<div class="section-break" id="s1">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 01</span><span class="sec-status status-action">Do This First</span></div>
+      <div class="sec-title">Pre-Flight Checklist</div>
+      <div class="sec-sub">Everything you need in place before running a single command</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="checklist">
+    <div class="check-item done"><div class="check-box"></div><div><div class="check-label">BigtechConsulting site files — all 28 HTML pages built</div><div class="check-sub">index.html, /services, /verticals, /blog, /tools — all complete</div></div></div>
+    <div class="check-item done"><div class="check-box"></div><div><div class="check-label">vercel.json config — CDN headers, rewrites, redirects configured</div><div class="check-sub">Clean URLs, security headers, caching rules all set</div></div></div>
+    <div class="check-item done"><div class="check-box"></div><div><div class="check-label">sitemap.xml — all 28 pages indexed for SEO</div><div class="check-sub">/public/sitemap.xml ready for Google Search Console</div></div></div>
+    <div class="check-item done"><div class="check-box"></div><div><div class="check-label">robots.txt — search crawling configured correctly</div><div class="check-sub">Internal docs excluded, all public pages allowed</div></div></div>
+    <div class="check-item done"><div class="check-box"></div><div><div class="check-label">404.html — custom error page</div><div class="check-sub">On-brand error page with navigation back to key pages</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Vercel account — create at vercel.com (free)</div><div class="check-sub">Sign up with your GitHub account for seamless integration</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">GitHub repo — push project to sunilkattikar105279/bigtechconsulting</div><div class="check-sub">Can also use the sixab repo in a /bigtechconsulting subdirectory</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Domain — bigtechconsulting.com purchased (or decide subdomain)</div><div class="check-sub">Namecheap, GoDaddy, or Google Domains all work fine with Vercel</div></div></div>
+  </div>
+</div>
+
+<!-- S2: PROJECT STRUCTURE -->
+<div class="section-break" id="s2">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 02</span><span class="sec-status status-ready">Files Ready</span></div>
+      <div class="sec-title">Project File Structure</div>
+      <div class="sec-sub">Exactly how the repository should be organized for Vercel</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="tree">
+<span class="dir">bigtechconsulting/</span>             <span class="note">← root of repo</span>
+├── <span class="file">vercel.json</span>                  <span class="note">← Vercel config (CDN, headers, redirects)</span>
+├── <span class="file">package.json</span>                 <span class="note">← optional: for local dev server</span>
+├── <span class="file">.gitignore</span>
+├── <span class="file">README.md</span>
+└── <span class="dir">public/</span>                      <span class="note">← Vercel outputDirectory</span>
+    ├── <span class="file">index.html</span>               <span class="note">← Homepage (bigtechconsulting.com/)</span>
+    ├── <span class="file">404.html</span>                 <span class="note">← Custom error page</span>
+    ├── <span class="file">robots.txt</span>
+    ├── <span class="file">sitemap.xml</span>
+    ├── <span class="dir">assets/css/</span>
+    │   └── <span class="file">shared-styles.css</span>    <span class="note">← Global stylesheet, cached at CDN edge</span>
+    ├── <span class="dir">services/</span>
+    │   ├── <span class="file">ai-change-management.html</span>
+    │   ├── <span class="file">responsible-ai.html</span>
+    │   ├── <span class="file">ai-data-strategy.html</span>
+    │   ├── <span class="file">ai-roi.html</span>
+    │   ├── <span class="file">ai-workforce.html</span>
+    │   ├── <span class="file">ai-vendor-selection.html</span>
+    │   └── <span class="file">ai-pmo.html</span>
+    ├── <span class="dir">verticals/</span>
+    │   ├── <span class="file">financial-services.html</span>
+    │   ├── <span class="file">healthcare.html</span>
+    │   └── <span class="file">manufacturing.html</span>
+    ├── <span class="dir">blog/</span>
+    │   ├── <span class="file">index.html</span>            <span class="note">← /blog</span>
+    │   ├── <span class="file">why-ai-projects-fail.html</span>
+    │   └── <span class="note">... 11 more articles</span>
+    └── <span class="dir">tools/</span>
+        └── <span class="file">ai-maturity-assessment.html</span>
+  </div>
+
+  <div class="callout blue">
+    <p>📌 <strong>Key rule:</strong> <span class="inline-code">vercel.json</span> must be in the <strong>root</strong> of the repo (not inside <span class="inline-code">public/</span>). The <span class="inline-code">outputDirectory</span> setting inside it tells Vercel to serve from <span class="inline-code">public/</span>. This is already configured correctly in your files.</p>
+  </div>
+</div>
+
+<!-- S3: DEPLOY METHOD A - CLI -->
+<div class="section-break" id="s3">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 03</span><span class="sec-status status-action">Choose One Method</span></div>
+      <div class="sec-title">Deployment Methods</div>
+      <div class="sec-sub">Three ways to deploy — pick the one that fits your workflow</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--midnight);margin-bottom:6px;letter-spacing:-.4px;">Method A — Vercel CLI <span style="font-size:13px;font-weight:600;color:var(--success);background:var(--success-light);padding:3px 10px;border-radius:20px;margin-left:8px;">Recommended</span></h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Best for developers. Deploys in under 60 seconds from your terminal. Also enables preview deployments for every push.</p>
+
+  <pre><code><span class="comment"># 1. Install Vercel CLI globally</span>
+<span class="cmd">npm install -g vercel</span>
+
+<span class="comment"># 2. Log in with your Vercel account</span>
+<span class="cmd">vercel login</span>
+<span class="comment"># → Opens browser, sign in with GitHub</span>
+
+<span class="comment"># 3. Navigate to your project root</span>
+<span class="cmd">cd /path/to/bigtechconsulting</span>
+
+<span class="comment"># 4. First deploy (follow prompts)</span>
+<span class="cmd">vercel</span>
+<span class="comment"># When asked:
+#   Set up and deploy? → Y
+#   Which scope? → your account
+#   Link to existing project? → N
+#   Project name? → bigtechconsulting
+#   In which directory is your code? → ./
+#   Want to override settings? → N</span>
+
+<span class="comment"># 5. Deploy to production</span>
+<span class="cmd">vercel --prod</span>
+<span class="comment"># → Live at bigtechconsulting.vercel.app in ~15 seconds</span></code></pre>
+
+  <hr style="margin:32px 0;"/>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--midnight);margin-bottom:6px;letter-spacing:-.4px;">Method B — GitHub Integration</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Best for continuous deployment. Every push to <span class="inline-code">main</span> branch auto-deploys to production. Every PR gets a preview URL.</p>
+
+  <div class="step-list">
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">1</div></div>
+      <div class="step-body"><h4>Push project to GitHub</h4>
+<pre style="margin-top:10px;"><code><span class="cmd">cd /path/to/bigtechconsulting</span>
+<span class="cmd">git init</span>
+<span class="cmd">git add .</span>
+<span class="cmd">git commit -m "Initial deploy: BigtechConsulting production site"</span>
+<span class="cmd">git remote add origin https://github.com/sunilkattikar105279/bigtechconsulting.git</span>
+<span class="cmd">git branch -M main</span>
+<span class="cmd">git push -u origin main</span></code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">2</div></div>
+      <div class="step-body"><h4>Import project in Vercel dashboard</h4>
+        <p>Go to <strong>vercel.com/new</strong> → Click <strong>"Import Git Repository"</strong> → Select <strong>sunilkattikar105279/bigtechconsulting</strong> from the list.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">3</div></div>
+      <div class="step-body"><h4>Configure build settings</h4>
+        <p>In the Vercel import screen, set these values:</p>
+        <table class="table" style="margin-top:12px;">
+          <tr><td style="font-weight:700;width:180px;">Framework Preset</td><td><span class="inline-code">Other</span></td></tr>
+          <tr><td style="font-weight:700;">Root Directory</td><td><span class="inline-code">./</span> (leave blank)</td></tr>
+          <tr><td style="font-weight:700;">Build Command</td><td><span class="inline-code">(leave empty)</span></td></tr>
+          <tr><td style="font-weight:700;">Output Directory</td><td><span class="inline-code">public</span></td></tr>
+          <tr><td style="font-weight:700;">Install Command</td><td><span class="inline-code">(leave empty)</span></td></tr>
+        </table>
+        <div class="note" style="display:flex;gap:8px;background:var(--amber-light);border-radius:var(--r);padding:10px 14px;margin-top:12px;font-size:13px;color:var(--amber-dark);">💡 Vercel auto-detects the <span class="inline-code">outputDirectory: "public"</span> from your vercel.json, so you may not need to set this manually.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle amber">4</div></div>
+      <div class="step-body"><h4>Click Deploy</h4>
+        <p>Vercel will deploy in ~15 seconds. You'll get a preview URL like <span class="inline-code">bigtechconsulting.vercel.app</span>. Every future push to <span class="inline-code">main</span> auto-deploys.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin:32px 0;"/>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--midnight);margin-bottom:6px;letter-spacing:-.4px;">Method C — Drag and Drop</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">No Git, no CLI. Fastest possible deploy — drag the <span class="inline-code">public/</span> folder directly onto vercel.com/new.</p>
+  <div class="callout">
+    <p>1. Go to <strong>vercel.com/new</strong> → scroll to "Deploy without Git" section<br/>
+    2. Drag your entire <span class="inline-code">public/</span> folder into the drop zone<br/>
+    3. Done — live in 30 seconds at a <span class="inline-code">*.vercel.app</span> URL<br/>
+    <strong>Note:</strong> This method doesn't support auto-deploys. Use Method A or B for ongoing development.</p>
+  </div>
+</div>
+
+<!-- S4: CUSTOM DOMAIN -->
+<div class="section-break" id="s4">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 04</span><span class="sec-status status-action">Required</span></div>
+      <div class="sec-title">Custom Domain Setup</div>
+      <div class="sec-sub">Connect bigtechconsulting.com — Vercel handles SSL automatically</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+
+  <div class="step-list">
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">1</div></div>
+      <div class="step-body"><h4>Add domain in Vercel dashboard</h4>
+        <p>Go to your project in Vercel → <strong>Settings → Domains</strong> → Add both:</p>
+        <pre style="margin-top:12px;"><code><span class="str">bigtechconsulting.com</span>
+<span class="str">www.bigtechconsulting.com</span></code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">2</div></div>
+      <div class="step-body"><h4>Update DNS records at your registrar</h4>
+        <p>Log into your domain registrar (Namecheap, GoDaddy, etc.) and set these DNS records:</p>
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-top:12px;">
+          <div class="dns-row" style="font-size:11px;font-weight:700;color:var(--muted);padding-bottom:8px;">
+            <span>TYPE</span><span>HOST</span><span>VALUE</span>
+          </div>
+          <div class="dns-row"><span class="dns-type">A</span><span class="dns-host">@</span><span class="dns-val">76.76.21.21</span></div>
+          <div class="dns-row"><span class="dns-type">CNAME</span><span class="dns-host">www</span><span class="dns-val">cname.vercel-dns.com</span></div>
+        </div>
+        <div class="note" style="display:flex;gap:8px;background:var(--blue-light);border-radius:var(--r);padding:10px 14px;margin-top:12px;font-size:13px;color:#0F3ACC;">⏱️ DNS propagation takes 5–60 minutes. Vercel will show a green checkmark when verified.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle green">3</div></div>
+      <div class="step-body"><h4>SSL certificate — automatic</h4>
+        <p>Vercel provisions a free Let's Encrypt SSL certificate automatically once DNS propagates. No action required — HTTPS is live within minutes of domain verification.</p>
+        <div class="note" style="display:flex;gap:8px;background:var(--success-light);border-radius:var(--r);padding:10px 14px;margin-top:10px;font-size:13px;color:var(--success);">✅ Your site will be live at https://bigtechconsulting.com with full HTTPS enforced.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>💡 <strong>Already have a domain elsewhere?</strong> If bigtechconsulting.com is registered at GoDaddy/Namecheap with another site on it, just update the A and CNAME records — the old site is replaced. No need to transfer the domain to Vercel unless you want to.</p>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">www vs non-www redirect</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">In your Vercel domain settings, set <span class="inline-code">bigtechconsulting.com</span> as the primary domain and redirect <span class="inline-code">www.bigtechconsulting.com</span> to it (or vice versa). This prevents duplicate content in Google.</p>
+</div>
+
+<!-- S5: ENV VARS & CONTACT FORM -->
+<div class="section-break" id="s5">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 05</span><span class="sec-status status-action">Configure</span></div>
+      <div class="sec-title">Contact Form & Integrations</div>
+      <div class="sec-sub">Wire up lead capture — the most important functional piece</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="card-grid">
+    <div class="card green-border">
+      <h4>Option A — Formspree (Easiest)</h4>
+      <p>Free tier handles 50 submissions/month. Sign up at formspree.io, create a form, get your endpoint URL.</p>
+    </div>
+    <div class="card">
+      <h4>Option B — SIXXAB AI Lead Gen</h4>
+      <p>Use SIXXAB AI's built-in lead generation tool to capture and manage leads directly in your platform.</p>
+    </div>
+    <div class="card">
+      <h4>Option C — Vercel + Resend</h4>
+      <p>Add a Vercel serverless function + Resend email API. More control, still free at low volume.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Formspree Setup (Recommended — 5 min)</h3>
+  <div class="step-list">
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">1</div></div>
+      <div class="step-body"><h4>Create Formspree account</h4>
+        <p>Go to <strong>formspree.io</strong> → Sign up free → New Form → Name it "BigtechConsulting Contact" → Copy your form endpoint (looks like <span class="inline-code">https://formspree.io/f/xyzabc</span>)</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">2</div></div>
+      <div class="step-body"><h4>Add contact form to index.html</h4>
+        <p>In the CTA section of your homepage, replace the email link with this form:</p>
+        <pre><code><span class="key">&lt;form</span> <span class="str">action</span>=<span class="val">"https://formspree.io/f/YOUR_ID"</span>
+      <span class="str">method</span>=<span class="val">"POST"</span><span class="key">&gt;</span>
+  <span class="key">&lt;input</span> <span class="str">type</span>=<span class="val">"text"</span>  <span class="str">name</span>=<span class="val">"name"</span>    <span class="str">placeholder</span>=<span class="val">"Your name"</span>    <span class="str">required</span><span class="key">/&gt;</span>
+  <span class="key">&lt;input</span> <span class="str">type</span>=<span class="val">"email"</span> <span class="str">name</span>=<span class="val">"email"</span>   <span class="str">placeholder</span>=<span class="val">"Work email"</span>    <span class="str">required</span><span class="key">/&gt;</span>
+  <span class="key">&lt;input</span> <span class="str">type</span>=<span class="val">"text"</span>  <span class="str">name</span>=<span class="val">"company"</span> <span class="str">placeholder</span>=<span class="val">"Company"</span><span class="key">/&gt;</span>
+  <span class="key">&lt;select</span> <span class="str">name</span>=<span class="val">"interest"</span><span class="key">&gt;</span>
+    <span class="key">&lt;option&gt;</span>AI Strategy<span class="key">&lt;/option&gt;</span>
+    <span class="key">&lt;option&gt;</span>AI Transformation Program<span class="key">&lt;/option&gt;</span>
+    <span class="key">&lt;option&gt;</span>AI Governance<span class="key">&lt;/option&gt;</span>
+    <span class="key">&lt;option&gt;</span>SIXXAB AI Platform<span class="key">&lt;/option&gt;</span>
+  <span class="key">&lt;/select&gt;</span>
+  <span class="key">&lt;button</span> <span class="str">type</span>=<span class="val">"submit"</span><span class="key">&gt;</span>Book Strategy Call<span class="key">&lt;/button&gt;</span>
+<span class="key">&lt;/form&gt;</span></code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle green">3</div></div>
+      <div class="step-body"><h4>Leads go straight to your email + SIXXAB CRM</h4>
+        <p>In Formspree settings, set the notification email. Then use SIXXAB AI's CRM webhook integration to automatically sync every submission into your SIXXAB pipeline.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Environment Variables</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">This site is fully static — no server-side environment variables required. If you add analytics or API integrations later, set them in <strong>Vercel → Settings → Environment Variables</strong>.</p>
+  <table class="table">
+    <thead><tr><th>Variable</th><th>Value</th><th>When Needed</th></tr></thead>
+    <tbody>
+      <tr><td><span class="inline-code">NEXT_PUBLIC_APP_URL</span></td><td><span class="inline-code">https://www.bigtechconsulting.com</span></td><td>If adding Next.js later</td></tr>
+      <tr><td><span class="inline-code">GA_MEASUREMENT_ID</span></td><td><span class="inline-code">G-XXXXXXXXXX</span></td><td>When adding Google Analytics</td></tr>
+      <tr><td><span class="inline-code">FORMSPREE_ID</span></td><td><span class="inline-code">xyzabc12</span></td><td>Contact form (client-side only)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- S6: ANALYTICS & SEO -->
+<div class="section-break" id="s6">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 06</span><span class="sec-status status-action">Do Day 1</span></div>
+      <div class="sec-title">Analytics, SEO & Search Console</div>
+      <div class="sec-sub">Set up measurement before your first visitor arrives</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin-bottom:14px;letter-spacing:-.3px;">Google Analytics 4</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Add this snippet to the <span class="inline-code">&lt;head&gt;</span> of every HTML page (or add it to <span class="inline-code">shared-styles.css</span>'s companion JS include):</p>
+  <pre><code><span class="comment">&lt;!-- Google Analytics 4 — add to &lt;head&gt; of every page --&gt;</span>
+<span class="key">&lt;script</span> <span class="str">async</span> <span class="str">src</span>=<span class="val">"https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"</span><span class="key">&gt;&lt;/script&gt;</span>
+<span class="key">&lt;script&gt;</span>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag(<span class="str">'js'</span>, new Date());
+  gtag(<span class="str">'config'</span>, <span class="str">'G-XXXXXXXXXX'</span>);
+<span class="key">&lt;/script&gt;</span></code></pre>
+  <div class="callout blue"><p>📊 Replace <span class="inline-code">G-XXXXXXXXXX</span> with your actual Measurement ID from Google Analytics → Admin → Data Streams.</p></div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Google Search Console</h3>
+  <div class="step-list">
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">1</div></div>
+      <div class="step-body"><h4>Add property</h4><p>Go to <strong>search.google.com/search-console</strong> → Add Property → URL prefix → enter <span class="inline-code">https://bigtechconsulting.com</span></p></div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle">2</div></div>
+      <div class="step-body"><h4>Verify ownership</h4><p>Choose "HTML tag" verification → copy the meta tag → paste into the <span class="inline-code">&lt;head&gt;</span> of <span class="inline-code">index.html</span> → deploy → click Verify.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-marker"><div class="step-circle green">3</div></div>
+      <div class="step-body"><h4>Submit sitemap</h4><p>In Search Console → Sitemaps → Enter <span class="inline-code">https://bigtechconsulting.com/sitemap.xml</span> → Submit. Google will start indexing all 28 pages within 48 hours.</p></div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Vercel Analytics (Built-in)</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:8px;">Vercel has built-in Web Vitals analytics — enable it in your project dashboard under <strong>Analytics</strong>. Shows Core Web Vitals (LCP, FID, CLS) per page. Free on Hobby, paid on Pro.</p>
+</div>
+
+<!-- S7: PERFORMANCE -->
+<div class="section-break" id="s7">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 07</span><span class="sec-status status-info">Already Configured</span></div>
+      <div class="sec-title">Performance & CDN</div>
+      <div class="sec-sub">What's already optimized — and what to do next</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="card-grid">
+    <div class="card done" style="background:var(--success-light);border-color:rgba(15,110,86,.2);">
+      <h4 style="color:var(--success);">✅ CDN Edge Caching</h4>
+      <p>vercel.json configures <span class="inline-code">Cache-Control: immutable</span> for all assets. Your CSS and fonts are cached at Vercel's 100+ edge locations globally.</p>
+    </div>
+    <div class="card done" style="background:var(--success-light);border-color:rgba(15,110,86,.2);">
+      <h4 style="color:var(--success);">✅ Security Headers</h4>
+      <p>XSS protection, content type sniffing prevention, clickjacking protection, and referrer policy — all configured in vercel.json headers.</p>
+    </div>
+    <div class="card done" style="background:var(--success-light);border-color:rgba(15,110,86,.2);">
+      <h4 style="color:var(--success);">✅ Clean URLs</h4>
+      <p><span class="inline-code">cleanUrls: true</span> in vercel.json means <span class="inline-code">/services/responsible-ai</span> works without the <span class="inline-code">.html</span> extension. Better UX and SEO.</p>
+    </div>
+    <div class="card done" style="background:var(--success-light);border-color:rgba(15,110,86,.2);">
+      <h4 style="color:var(--success);">✅ HTTPS Enforced</h4>
+      <p>Vercel auto-provisions SSL and enforces HTTPS. HTTP requests are redirected to HTTPS automatically.</p>
+    </div>
+    <div class="card">
+      <h4>🔲 Google Fonts Preconnect</h4>
+      <p>Already in your HTML heads. Confirm <span class="inline-code">&lt;link rel="preconnect"&gt;</span> tags are present on all pages for faster font loading.</p>
+    </div>
+    <div class="card">
+      <h4>🔲 Image Optimization</h4>
+      <p>When you add images, use WebP format and add <span class="inline-code">loading="lazy"</span> on below-fold images. Vercel Pro includes automatic image optimization.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Expected Lighthouse Scores</h3>
+  <table class="table">
+    <thead><tr><th>Metric</th><th>Target Score</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Performance</strong></td><td>90–98</td><td>Static HTML, CDN-cached CSS, no JS frameworks, preconnect fonts</td></tr>
+      <tr><td><strong>Accessibility</strong></td><td>95+</td><td>Semantic HTML, contrast ratios, alt attributes on images (when added)</td></tr>
+      <tr><td><strong>Best Practices</strong></td><td>100</td><td>HTTPS, security headers, no deprecated APIs</td></tr>
+      <tr><td><strong>SEO</strong></td><td>95+</td><td>Meta descriptions, sitemap, robots.txt, semantic headings, clean URLs</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- S8: POST-DEPLOY -->
+<div class="section-break" id="s8">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 08</span><span class="sec-status status-action">Post-Launch</span></div>
+      <div class="sec-title">Post-Deployment Checklist</div>
+      <div class="sec-sub">The 15 things to verify within the first hour of going live</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Homepage loads at https://bigtechconsulting.com</div><div class="check-sub">Check on both desktop and mobile</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">www.bigtechconsulting.com redirects to non-www (or vice versa)</div><div class="check-sub">No duplicate content for SEO</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">All service pages load correctly (/services/responsible-ai, etc.)</div><div class="check-sub">Test 3–4 pages manually</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">AI Maturity Assessment tool works end-to-end</div><div class="check-sub">Complete all 20 questions and verify results display</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Contact form submits and you receive email notification</div><div class="check-sub">Submit a test lead from the homepage CTA</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Blog articles load and internal links work</div><div class="check-sub">Click through from blog index to 3 articles</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">SSL certificate is valid (padlock in browser)</div><div class="check-sub">Check on Chrome and Safari</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">404 page displays correctly for broken URLs</div><div class="check-sub">Visit https://bigtechconsulting.com/nonexistent</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Google Analytics receiving events</div><div class="check-sub">Open GA4 Realtime report while browsing the site</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Google Search Console — sitemap submitted</div><div class="check-sub">Submit sitemap.xml URL and confirm no errors</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Lighthouse score run on homepage</div><div class="check-sub">Chrome DevTools → Lighthouse → run audit</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Mobile responsiveness verified</div><div class="check-sub">Check homepage, a service page, and the assessment tool on iPhone/Android</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">startupsinabox.com links open correctly</div><div class="check-sub">All SIXXAB AI cross-links open in new tab</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Social media preview cards set up</div><div class="check-sub">Add Open Graph meta tags to index.html for LinkedIn/Twitter share previews</div></div></div>
+    <div class="check-item"><div class="check-box"></div><div><div class="check-label">Vercel project settings — set production branch to main</div><div class="check-sub">Vercel → Settings → Git → Production Branch = main</div></div></div>
+  </div>
+</div>
+
+<!-- S9: ONGOING OPS -->
+<div class="section-break" id="s9">
+  <div class="section-break-inner">
+    <div class="sec-header">
+      <div class="sec-num"><span class="sec-badge">STEP 09</span><span class="sec-status status-info">Ongoing</span></div>
+      <div class="sec-title">Ongoing Deployment Workflow</div>
+      <div class="sec-sub">How to publish new content and updates going forward</div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin-bottom:14px;letter-spacing:-.3px;">Adding a New Blog Article</h3>
+  <pre><code><span class="comment"># 1. Create the new article file</span>
+<span class="cmd">cp public/blog/ai-governance-enterprise.html public/blog/my-new-article.html</span>
+<span class="comment"># Edit the HTML content, title, meta description</span>
+
+<span class="comment"># 2. Add it to the blog index</span>
+<span class="comment"># Edit public/blog/index.html — add a new &lt;a class="blog-card"&gt; block</span>
+
+<span class="comment"># 3. Add to sitemap</span>
+<span class="comment"># Edit public/sitemap.xml — add a new &lt;url&gt; entry</span>
+
+<span class="comment"># 4. Deploy</span>
+<span class="cmd">git add .</span>
+<span class="cmd">git commit -m "New blog: [title]"</span>
+<span class="cmd">git push origin main</span>
+<span class="comment"># → Auto-deploys to production in ~15 seconds</span></code></pre>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Rollback a Bad Deploy</h3>
+  <pre><code><span class="comment"># Via CLI — rollback to previous deployment</span>
+<span class="cmd">vercel rollback</span>
+
+<span class="comment"># Via Dashboard — Vercel keeps full deployment history</span>
+<span class="comment"># Go to: vercel.com → Project → Deployments → click any past deploy → "Promote to Production"</span></code></pre>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Preview Deployments</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:8px;">Every non-main branch push gets a unique preview URL (e.g. <span class="inline-code">bigtechconsulting-git-feature-x.vercel.app</span>). Use this to review changes before merging to main.</p>
+  <pre><code><span class="comment"># Create a preview branch</span>
+<span class="cmd">git checkout -b new-service-page</span>
+<span class="comment"># make changes...</span>
+<span class="cmd">git push origin new-service-page</span>
+<span class="comment"># → Vercel creates a preview URL automatically — share for review</span>
+<span class="cmd">git checkout main && git merge new-service-page && git push</span>
+<span class="comment"># → Promotes to production</span></code></pre>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--midnight);margin:28px 0 12px;letter-spacing:-.3px;">Vercel Plan Comparison</h3>
+  <table class="table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Limits</th><th>Recommended For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hobby</strong></td><td>Free</td><td>100GB bandwidth/mo, 1 member, no password protection</td><td>Launch phase — first 90 days</td></tr>
+      <tr><td><strong>Pro</strong></td><td>$20/mo per member</td><td>1TB bandwidth, team collaboration, password-protected previews, analytics</td><td>Once you have clients reviewing previews</td></tr>
+      <tr><td><strong>Enterprise</strong></td><td>Custom</td><td>Unlimited, SLA, SSO, advanced security</td><td>When you have enterprise clients requiring it</td></tr>
+    </tbody>
+  </table>
+  <div class="callout green"><p>✅ <strong>Start on Hobby (free)</strong>. The BigtechConsulting static site will run perfectly on it. Upgrade to Pro only when you need team collaboration or your bandwidth exceeds 100GB/month (that's roughly 500K monthly visitors).</p></div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="section-break">
+  <div class="section-break-inner">
+    <div style="background:var(--midnight);border-radius:var(--rl);padding:48px;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(26,86,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(26,86,255,.05) 1px,transparent 1px);background-size:40px 40px;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">You're ready.</div>
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:white;letter-spacing:-1px;margin-bottom:14px;line-height:1.1;">BigtechConsulting.com — live in <span style="color:var(--amber);">15 minutes.</span></div>
+        <p style="font-size:15px;color:rgba(255,255,255,.5);max-width:540px;margin-bottom:28px;">28 pages. 7 service lines. 3 verticals. 13 blog articles. 1 interactive assessment tool. Full CDN caching, SSL, clean URLs, sitemap, and SEO-ready structure — all on Vercel's free tier.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <div style="background:rgba(239,159,39,.12);border:1px solid rgba(239,159,39,.25);border-radius:var(--r);padding:12px 20px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Primary site</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--amber);">bigtechconsulting.com</div>
+          </div>
+          <div style="background:rgba(26,86,255,.12);border:1px solid rgba(26,86,255,.25);border-radius:var(--r);padding:12px 20px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Platform partner</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#7BAAF5;">startupsinabox.com</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:12px 20px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Repo</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:rgba(255,255,255,.7);">github.com/sunilkattikar105279</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div class="df-inner">
+    <p><strong style="color:rgba(255,255,255,.7);">BigtechConsulting × SIXXAB AI</strong> — Vercel Deployment Plan v1.0 — June 2026</p>
+    <p>Confidential — S. Kattikar</p>
+  </div>
+</div>
+
+</body>
+</html>
