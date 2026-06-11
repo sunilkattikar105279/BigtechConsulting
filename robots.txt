@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://bigtechconsulting.com/sitemap.xml
-
-# Disallow internal/plan docs from search indexing
-Disallow: /launch-plan
-Disallow: /sixxab-brand-plan
