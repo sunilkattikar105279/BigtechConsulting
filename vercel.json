@@ -3,14 +3,25 @@
   "name": "bigtechconsulting",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/",     "destination": "/index.html" },
+    { "source": "/blog", "destination": "/blog/index.html" }
+  ],
+  "redirects": [
+    { "source": "/home",       "destination": "/",                              "permanent": true  },
+    { "source": "/assessment", "destination": "/tools/ai-maturity-assessment",  "permanent": false },
+    { "source": "/maturity",   "destination": "/tools/ai-maturity-assessment",  "permanent": false },
+    { "source": "/sixxab",     "destination": "https://startupsinabox.com",     "permanent": false },
+    { "source": "/launch",     "destination": "/launch-plan",                   "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        { "key": "X-Frame-Options",        "value": "DENY"    },
+        { "key": "X-XSS-Protection",       "value": "1; mode=block" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
       ]
     },
     {
@@ -19,15 +30,5 @@
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/blog", "destination": "/blog/index.html" }
-  ],
-  "redirects": [
-    { "source": "/home",       "destination": "/",                                  "permanent": true  },
-    { "source": "/assessment", "destination": "/tools/ai-maturity-assessment",      "permanent": false },
-    { "source": "/maturity",   "destination": "/tools/ai-maturity-assessment",      "permanent": false },
-    { "source": "/sixxab",     "destination": "https://startupsinabox.com",         "permanent": false },
-    { "source": "/launch",     "destination": "/launch-plan",                       "permanent": false }
   ]
 }
