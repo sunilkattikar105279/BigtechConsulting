@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI Business Transformation — BigtechConsulting</title>
+<meta name="description" content="BigtechConsulting delivers enterprise AI transformation — strategy, governance, security, architecture, and execution. Powered by SIXXAB AI."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+:root{
+  --night:#080C18;--night2:#10162A;
+  --amber:#F0A028;--amberbg:#FDF4E3;--amberd:#7A4A08;
+  --blue:#1847F0;--bluebg:#EBF0FF;--blued:#0F30C4;
+  --chalk:#F6F6F2;--white:#fff;
+  --ink:#18202E;--muted:#5E6A88;--muted2:#98A2BA;
+  --border:#E2E6F2;--green:#0B6E50;--greenbg:#E2F5EE;
+  --r:10px;--rl:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-mark{width:34px;height:34px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.nav-brand{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--night);}
+.nav-brand span{color:var(--blue);}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .18s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;transition:background .18s;}
+.nav-cta:hover{background:var(--blued);}
+
+/* LAYOUT */
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px;}
+.sec{padding:88px 0;}
+.sec-sm{padding:56px 0;}
+
+/* TYPE */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);display:inline-block;margin-bottom:10px;}
+.eyebrow.am{color:var(--amberd);}
+h1.title{font-family:'Syne',sans-serif;font-size:clamp(38px,5.5vw,68px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;color:var(--night);margin-bottom:20px;}
+h1.title em{font-style:normal;color:var(--blue);}
+h2.title2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weight:800;letter-spacing:-1.2px;line-height:1.1;color:var(--night);margin-bottom:14px;}
+h2.title2 em{font-style:normal;color:var(--blue);}
+h2.title2.wh{color:#fff;}h2.title2.wh em{color:var(--amber);}
+.lead{font-size:17px;color:var(--muted);line-height:1.72;max-width:560px;}
+
+/* BUTTONS */
+.btn-b{display:inline-block;background:var(--blue);color:#fff;padding:13px 26px;border-radius:var(--r);font-size:15px;font-weight:600;transition:background .18s;}
+.btn-b:hover{background:var(--blued);}
+.btn-g{display:inline-block;border:1.5px solid var(--border);color:var(--ink);background:#fff;padding:12px 26px;border-radius:var(--r);font-size:15px;font-weight:600;transition:border-color .18s,color .18s;}
+.btn-g:hover{border-color:var(--blue);color:var(--blue);}
+.btn-a{display:inline-block;background:var(--amber);color:var(--night);padding:13px 26px;border-radius:var(--r);font-size:15px;font-weight:700;}
+.btn-w{display:inline-block;background:#fff;color:var(--blue);padding:13px 26px;border-radius:var(--r);font-size:15px;font-weight:700;}
+
+/* HERO */
+.hero{padding:148px 0 88px;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-180px;right:-220px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,#EBF0FF 0%,transparent 68%);pointer-events:none;}
+.hero-actions{display:flex;align-items:center;gap:14px;margin-top:36px;flex-wrap:wrap;}
+.stat-row{display:flex;gap:48px;flex-wrap:wrap;padding-top:40px;margin-top:44px;border-top:1px solid var(--border);}
+.stat-n{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--night);letter-spacing:-1px;line-height:1;}
+.stat-n em{font-style:normal;color:var(--blue);}
+.stat-l{font-size:13px;color:var(--muted);margin-top:3px;}
+
+/* MARQUEE */
+.mq-wrap{overflow:hidden;background:var(--chalk);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;}
+.mq-track{display:flex;gap:56px;animation:mqs 28s linear infinite;}
+.mq-item{font-size:13px;font-weight:600;color:var(--muted2);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+@keyframes mqs{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* CARDS */
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:20px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:border-color .2s,box-shadow .2s;}
+.card:hover{border-color:var(--blue);box-shadow:0 2px 16px rgba(24,71,240,.08);}
+.ci{width:46px;height:46px;border-radius:11px;background:var(--bluebg);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.ci svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.ci.am{background:var(--amberbg);}
+.ci.am svg{stroke:var(--amberd);}
+.ci.gr{background:var(--greenbg);}
+.ci.gr svg{stroke:var(--green);}
+.card h3{font-size:16px;font-weight:700;color:var(--night);margin-bottom:8px;}
+.card p{font-size:13px;color:var(--muted);line-height:1.65;}
+.ctag{display:inline-block;margin-top:14px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.ct-b{background:var(--bluebg);color:var(--blued);}
+.ct-a{background:var(--amberbg);color:var(--amberd);}
+.ct-g{background:var(--greenbg);color:var(--green);}
+
+/* DARK / CHALK */
+.dk{background:var(--night);}
+.ck{background:var(--chalk);}
+
+/* VERTICALS */
+.vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;}
+.vp{border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:15px 18px;display:flex;align-items:center;gap:10px;transition:background .2s;}
+.vp:hover{background:rgba(255,255,255,.06);}
+.vdot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+.vp span{font-size:14px;font-weight:600;color:rgba(255,255,255,.82);}
+
+/* APPROACH */
+.ap-step{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--border);}
+.ap-step:last-child{border-bottom:none;}
+.ap-n{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:var(--blue);min-width:28px;padding-top:3px;}
+.ap-b h4{font-size:15px;font-weight:700;color:var(--night);margin-bottom:5px;}
+.ap-b p{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* WHY */
+.wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+.wc{border-radius:var(--rl);padding:28px;}
+.wc.cb{background:var(--bluebg);}
+.wc.cd{background:var(--night);}
+.wc.ca{background:var(--amberbg);}
+.wc.ck{background:var(--chalk);border:1px solid var(--border);}
+.wn{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-2px;margin-bottom:6px;}
+.wc.cb .wn{color:var(--blue);}
+.wc.cd .wn{color:#fff;}
+.wc.ca .wn{color:var(--amber);}
+.wc.ck .wn{color:var(--night);}
+.wc h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+.wc.cd h4,.wc.cd p{color:#fff;}
+.wc.cd p{color:rgba(255,255,255,.55)!important;}
+.wc p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* TESTIMONIALS */
+.tc{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;}
+.tc-stars{color:var(--amber);font-size:14px;margin-bottom:14px;}
+.tc-q{font-size:15px;color:var(--ink);line-height:1.72;font-style:italic;margin-bottom:22px;}
+.tc-auth{display:flex;align-items:center;gap:12px;}
+.av{width:38px;height:38px;border-radius:50%;background:var(--bluebg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0;}
+.an{font-size:14px;font-weight:700;color:var(--night);}
+.ar{font-size:12px;color:var(--muted2);}
+
+/* SIXXAB PHASES */
+.ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ph{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:20px;}
+.ph-label{font-size:11px;font-weight:700;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.ph-name{font-size:15px;font-weight:700;color:#fff;}
+
+/* CTA BAND */
+.ctaband{background:var(--blue);}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{background:var(--night);padding:56px 0 28px;}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.fbrand p{font-size:13px;color:rgba(255,255,255,.38);margin-top:14px;max-width:250px;line-height:1.65;}
+.fcol h5{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:14px;}
+.fcol a{display:block;font-size:13px;color:rgba(255,255,255,.38);margin-bottom:8px;transition:color .18s;}
+.fcol a:hover{color:#fff;}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.fbot p{font-size:12px;color:rgba(255,255,255,.22);}
+
+/* BLOG */
+.bc{display:block;background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:border-color .2s,box-shadow .2s;}
+.bc:hover{border-color:var(--blue);box-shadow:0 2px 16px rgba(24,71,240,.08);}
+.bcat{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.bcs{background:var(--bluebg);color:var(--blued);}
+.bce{background:#EEF0FE;color:#3C3AB0;}
+.bcp{background:var(--amberbg);color:var(--amberd);}
+.bcg{background:#F5EBF8;color:#6B2E8A;}
+.bco{background:var(--greenbg);color:var(--green);}
+.bcsec{background:#FEF0EB;color:#9C3412;}
+.bdate{font-size:12px;color:var(--muted2);margin-bottom:8px;}
+.bc h3{font-size:17px;font-weight:700;color:var(--night);line-height:1.35;margin-bottom:8px;}
+.bc p{font-size:13px;color:var(--muted);line-height:1.65;}
+.rm{font-size:13px;font-weight:600;color:var(--blue);margin-top:14px;display:inline-block;}
+
+/* BREADCRUMB */
+.bc-nav{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:20px;}
+.bc-nav a{color:var(--muted);}
+.bc-nav a:hover{color:var(--blue);}
+
+/* ARTICLE */
+.art h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--night);letter-spacing:-.6px;margin:36px 0 12px;}
+.art p{font-size:16px;color:#2C3650;line-height:1.8;margin-bottom:18px;}
+.art blockquote{border-left:3px solid var(--amber);padding:14px 18px;background:var(--amberbg);border-radius:0 var(--r) var(--r) 0;margin:24px 0;}
+.art blockquote p{font-size:17px;color:var(--amberd);font-weight:500;margin-bottom:0;}
+.art ul{margin:0 0 18px 20px;display:flex;flex-direction:column;gap:8px;}
+.art ul li{font-size:15px;color:#2C3650;line-height:1.7;}
+
+/* ASSESSMENT */
+.opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .18s;margin-bottom:10px;background:#fff;}
+.opt:hover{border-color:var(--blue);background:var(--bluebg);}
+.opt.sel{border-color:var(--blue);background:var(--bluebg);}
+.obadge{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);flex-shrink:0;transition:all .18s;}
+.opt.sel .obadge{background:var(--blue);border-color:var(--blue);color:#fff;}
+.otext{font-size:14px;color:var(--ink);line-height:1.5;}
+.ptrack{height:6px;background:var(--chalk);border-radius:3px;overflow:hidden;}
+.pfill{height:100%;background:var(--blue);border-radius:3px;transition:width .4s;}
+.ddot{height:4px;flex:1;border-radius:2px;background:var(--border);transition:background .3s;}
+
+@media(max-width:768px){
+  .wrap{padding:0 20px;}
+  .sec{padding:60px 0;}
+  .nav-inner{padding:0 20px;}
+  .nav-links{display:none;}
+  .hero{padding:120px 0 60px;}
+  .hero-glow{display:none;}
+  .fg{grid-template-columns:1fr 1fr;}
+  .ph-grid{grid-template-columns:1fr;}
+  .cta-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-mark"><svg viewBox="0 0 20 20"><path d="M10 2L2 8l8 4 8-4-8-6z"/><path d="M2 14l8 4 8-4"/><path d="M2 11l8 4 8-4"/></svg></div>
+      <span class="nav-brand">Bigtech<span>Consulting</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#verticals">Verticals</a></li>
+      <li><a href="/blog">Insights</a></li>
+      <li><a href="/tools/ai-maturity-assessment">Free Assessment</a></li>
+    </ul>
+    <a href="/#contact" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap" style="position:relative;z-index:1;">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--bluebg);border:1px solid #C5D2FF;border-radius:40px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--blue);margin-bottom:22px;letter-spacing:.04em;text-transform:uppercase;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;"></span>
+      AI-First Business Transformation
+    </div>
+    <h1 class="title">Turn AI Strategy into<br/><em>Competitive Advantage</em></h1>
+    <p class="lead">BigtechConsulting partners with enterprises to design, govern, and scale AI transformation — from architecture to agentic platforms, across every vertical. Powered by SIXXAB AI.</p>
+    <div class="hero-actions">
+      <a href="/#contact" class="btn-b">Start Your Transformation</a>
+      <a href="/tools/ai-maturity-assessment" class="btn-g">Free AI Maturity Assessment</a>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-n">200<em>+</em></div><div class="stat-l">Enterprises Transformed</div></div>
+      <div><div class="stat-n">14</div><div class="stat-l">Industry Verticals</div></div>
+      <div><div class="stat-n">$2.4<em>B</em></div><div class="stat-l">Client Value Unlocked</div></div>
+      <div><div class="stat-n">98<em>%</em></div><div class="stat-l">Client Retention</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="mq-wrap"><div class="mq-track">
+  <span class="mq-item">Financial Services</span><span class="mq-item">Healthcare &amp; Life Sciences</span><span class="mq-item">Retail &amp; E-commerce</span><span class="mq-item">Manufacturing</span><span class="mq-item">Energy &amp; Utilities</span><span class="mq-item">Logistics &amp; Supply Chain</span><span class="mq-item">Government &amp; Public Sector</span><span class="mq-item">Education &amp; EdTech</span><span class="mq-item">Telecom &amp; Media</span><span class="mq-item">Real Estate</span><span class="mq-item">Insurance</span><span class="mq-item">Legal &amp; Compliance</span><span class="mq-item">Financial Services</span><span class="mq-item">Healthcare &amp; Life Sciences</span><span class="mq-item">Retail &amp; E-commerce</span><span class="mq-item">Manufacturing</span><span class="mq-item">Energy &amp; Utilities</span><span class="mq-item">Logistics &amp; Supply Chain</span><span class="mq-item">Government &amp; Public Sector</span><span class="mq-item">Education &amp; EdTech</span><span class="mq-item">Telecom &amp; Media</span><span class="mq-item">Real Estate</span><span class="mq-item">Insurance</span><span class="mq-item">Legal &amp; Compliance</span>
+</div></div>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <span class="eyebrow">Our Practice Areas</span>
+    <h2 class="title2" style="margin-bottom:14px;">Every Dimension of<br/><em>Enterprise AI</em></h2>
+    <p class="lead" style="margin-bottom:48px;">From strategy to execution — the full AI transformation stack. Powerful, trustworthy, scalable.</p>
+    <div class="g3">
+  <div class="card">
+    <div class="ci "><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <h3>AI Strategy</h3><p>Enterprise AI roadmaps aligned to business outcomes. Phased transformation plans that connect vision to production.</p>
+    <span class="ctag ct-b">Foundation</span>
+  </div>
+
+  <div class="card">
+    <div class="ci am"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg></div>
+    <h3>AI Governance</h3><p>End-to-end governance frameworks — EU AI Act, NIST RMF, ISO 42001, and sector-specific regulatory requirements.</p>
+    <span class="ctag ct-a">Risk &amp; Compliance</span>
+  </div>
+
+  <div class="card">
+    <div class="ci "><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+    <h3>AI Transformation</h3><p>Full-lifecycle transformation programs embedding AI into workflows, culture, and operating models — pilot to production.</p>
+    <span class="ctag ct-b">Change Management</span>
+  </div>
+
+  <div class="card">
+    <div class="ci am"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <h3>AI Security</h3><p>Prompt injection defense, data poisoning prevention, model security controls, and red-team assessments.</p>
+    <span class="ctag ct-a">Cybersecurity</span>
+  </div>
+
+  <div class="card">
+    <div class="ci "><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg></div>
+    <h3>AI Architecture</h3><p>Reference architectures for production AI — data pipelines, RAG systems, vector stores, model serving, LLMOps.</p>
+    <span class="ctag ct-b">Technical Design</span>
+  </div>
+
+  <div class="card">
+    <div class="ci gr"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+    <h3>Agentic Platforms</h3><p>Autonomous AI agent systems — multi-agent orchestration, tool-use frameworks, memory systems, human-in-the-loop.</p>
+    <span class="ctag ct-g">Emerging</span>
+  </div>
+
+  <div class="card">
+    <div class="ci "><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <h3>AI Ops</h3><p>Production-grade LLMOps: model monitoring, drift detection, automated retraining, and AI incident response.</p>
+    <span class="ctag ct-b">Operations</span>
+  </div>
+
+  <div class="card">
+    <div class="ci am"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></div>
+    <h3>AI Cost Optimisation</h3><p>Reduce AI inference spend by 40–60%: model right-sizing, caching, prompt compression, and batching architectures.</p>
+    <span class="ctag ct-a">FinOps</span>
+  </div>
+
+  <div class="card">
+    <div class="ci gr"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+    <h3>AI Change Management</h3><p>Executive alignment, champion networks, role-based training, adoption measurement, and resistance management.</p>
+    <span class="ctag ct-g">Enablement</span>
+  </div></div>
+  </div>
+</section>
+
+<section class="sec dk" id="verticals">
+  <div class="wrap">
+    <span class="eyebrow am">Industry Coverage</span>
+    <h2 class="title2 wh" style="margin-bottom:14px;">Built for Your Industry</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.5);max-width:520px;margin-bottom:44px;line-height:1.7;">Deep vertical expertise means faster time-to-value. Pre-built frameworks, compliance templates, and use-case libraries for your sector.</p>
+    <div class="vg"><div class="vp"><div class="vdot"></div><span>Financial Services</span></div>
+<div class="vp"><div class="vdot"></div><span>Healthcare &amp; Life Sciences</span></div>
+<div class="vp"><div class="vdot"></div><span>Retail &amp; E-commerce</span></div>
+<div class="vp"><div class="vdot"></div><span>Manufacturing</span></div>
+<div class="vp"><div class="vdot"></div><span>Energy &amp; Utilities</span></div>
+<div class="vp"><div class="vdot"></div><span>Logistics &amp; Supply Chain</span></div>
+<div class="vp"><div class="vdot"></div><span>Government &amp; Public Sector</span></div>
+<div class="vp"><div class="vdot"></div><span>Education &amp; EdTech</span></div>
+<div class="vp"><div class="vdot"></div><span>Telecom &amp; Media</span></div>
+<div class="vp"><div class="vdot"></div><span>Real Estate</span></div>
+<div class="vp"><div class="vdot"></div><span>Insurance</span></div>
+<div class="vp"><div class="vdot"></div><span>Legal &amp; Compliance</span></div></div>
+  </div>
+</section>
+
+<section class="sec ck">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+      <div>
+        <span class="eyebrow">How We Work</span>
+        <h2 class="title2" style="margin-bottom:28px;">A Methodology Built<br/><em>for Enterprise Scale</em></h2>
+        <div class="ap-step"><span class="ap-n">01</span><div class="ap-b"><h4>Discover &amp; Diagnose</h4><p>Deep-dive into AI maturity, data assets, organisational readiness, and competitive landscape to find the highest-leverage transformation opportunities.</p></div></div>
+        <div class="ap-step"><span class="ap-n">02</span><div class="ap-b"><h4>Design &amp; Architect</h4><p>Co-create a bespoke AI architecture and governance framework aligned to your risk profile, compliance requirements, and technology landscape.</p></div></div>
+        <div class="ap-step"><span class="ap-n">03</span><div class="ap-b"><h4>Build &amp; Pilot</h4><p>Rapid prototyping in 4–6 week sprints with clear success metrics. De-risk transformation by proving value before full investment.</p></div></div>
+        <div class="ap-step"><span class="ap-n">04</span><div class="ap-b"><h4>Scale &amp; Optimise</h4><p>Production deployment, LLMOps instrumentation, cost optimisation, and continuous improvement loops — we stay engaged through sustained performance.</p></div></div>
+      </div>
+      <div style="background:var(--night);border-radius:var(--rl);padding:44px;aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(24,71,240,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(24,71,240,.07) 1px,transparent 1px);background-size:40px 40px;"></div>
+        <div style="position:absolute;top:24px;right:24px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;border-radius:8px;padding:7px 13px;z-index:1;">ISO 27001 Aligned</div>
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1.2;position:relative;z-index:1;">From<br/><span style="color:var(--amber);">Vision</span><br/>to<br/><span style="color:var(--amber);">Value.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <span class="eyebrow">Why BigtechConsulting</span>
+    <h2 class="title2" style="margin-bottom:40px;">The Difference Is<br/><em>in the Depth</em></h2>
+    <div class="wg">
+      <div class="wc cb"><div class="wn">9+</div><h4>Years of AI Expertise</h4><p>Dedicated AI practice since the deep learning revolution — not a technology pivot.</p></div>
+      <div class="wc cd"><div class="wn">350+</div><h4>Certified AI Practitioners</h4><p>Every engagement led by practitioners with real production AI experience across major cloud platforms.</p></div>
+      <div class="wc ca"><div class="wn">4wk</div><h4>Rapid Time to Value</h4><p>Pre-built accelerators cut time-to-first-outcome by 60% versus traditional consulting.</p></div>
+      <div class="wc ck"><div class="wn">100%</div><h4>Vendor Agnostic</h4><p>We recommend what is right for your business — not what earns the biggest referral fee.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec ck">
+  <div class="wrap">
+    <span class="eyebrow">Client Stories</span>
+    <h2 class="title2" style="margin-bottom:44px;">Real Outcomes,<br/><em>Real Enterprises</em></h2>
+    <div class="g3">
+  <div class="tc">
+    <div class="tc-stars">★★★★★</div>
+    <p class="tc-q">"BigtechConsulting moved us from a PoC graveyard to three live production AI systems in six months. Their governance framework alone saved us two regulatory incidents."</p>
+    <div class="tc-auth"><div class="av">JR</div><div><div class="an">James R.</div><div class="ar">CTO, Global Insurance Group</div></div></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-stars">★★★★★</div>
+    <p class="tc-q">"Their AI Cost Optimisation practice cut our inference spend by 47% while improving latency. I did not expect consulting to deliver FinOps-level precision."</p>
+    <div class="tc-auth"><div class="av">MK</div><div><div class="an">Maya K.</div><div class="ar">VP Engineering, Retail Platform</div></div></div>
+  </div>
+
+  <div class="tc">
+    <div class="tc-stars">★★★★★</div>
+    <p class="tc-q">"The agentic platform they designed for our operations team runs 24/7 with human escalation under 2%. ROI was evident in the first quarter of deployment."</p>
+    <div class="tc-auth"><div class="av">DL</div><div><div class="an">David L.</div><div class="ar">COO, Logistics Enterprise</div></div></div>
+  </div></div>
+  </div>
+</section>
+
+<section class="sec dk">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+      <div>
+        <span class="eyebrow am">Powered by SIXXAB AI</span>
+        <h2 class="title2 wh" style="margin-bottom:16px;">Strategy plus platform equals <em>transformation.</em></h2>
+        <p style="font-size:16px;color:rgba(255,255,255,.5);line-height:1.72;margin-bottom:28px;">Every BigtechConsulting engagement is backed by SIXXAB AI at StartupsinaBox.com — the autonomous business platform. Your AI strategy does not live in a deck. It runs in your business from day one across all six phases.</p>
+        <a href="https://startupsinabox.com" target="_blank" class="btn-a">Explore SIXXAB AI →</a>
+      </div>
+      <div class="ph-grid">
+        <div class="ph"><div class="ph-label">Phase 1</div><div class="ph-name">Validate</div></div><div class="ph"><div class="ph-label">Phase 2</div><div class="ph-name">Launch</div></div><div class="ph"><div class="ph-label">Phase 3</div><div class="ph-name">Optimise</div></div><div class="ph"><div class="ph-label">Phase 4</div><div class="ph-name">Scale</div></div><div class="ph"><div class="ph-label">Phase 5</div><div class="ph-name">Capitalise</div></div><div class="ph"><div class="ph-label">Phase 6</div><div class="ph-name">Global</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <span class="eyebrow">Latest Insights</span>
+        <h2 class="title2">Practitioner Intelligence<br/><em>on AI Transformation</em></h2>
+      </div>
+      <a href="/blog" class="btn-g">View all articles →</a>
+    </div>
+    <div class="g3">
+  <a href="/blog/why-ai-projects-fail" class="bc">
+    <span class="bcat bcs">AI Strategy</span>
+    <div class="bdate">June 2026 · 12 min read</div>
+    <h3>Why 68% of Enterprise AI Projects Never Reach Production</h3>
+    <p>We analysed 200+ enterprise AI programs to find the five failure patterns — and the SCALE framework that breaks them.</p>
+    <span class="rm">Read article →</span>
+  </a>
+  <a href="/blog/responsible-ai" class="bc">
+    <span class="bcat bce">Responsible AI</span>
+    <div class="bdate">May 2026 · 9 min read</div>
+    <h3>What the EU AI Act Actually Requires of Your Organisation in 2026</h3>
+    <p>A plain-English guide to EU AI Act compliance with a 6-month roadmap for mid-size enterprises.</p>
+    <span class="rm">Read article →</span>
+  </a>
+  <a href="/blog/agentic-ai" class="bc">
+    <span class="bcat bcp">Agentic AI</span>
+    <div class="bdate">April 2026 · 8 min read</div>
+    <h3>Agentic AI Explained: What It Is and How to Deploy It This Quarter</h3>
+    <p>Not just smarter chatbots — a fundamentally different computing paradigm. Where it creates real enterprise value.</p>
+    <span class="rm">Read article →</span>
+  </a></div>
+  </div>
+</section>
+
+<section class="sec ctaband" id="contact">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div>
+        <h2 class="title2 wh" style="margin-bottom:12px;">Ready to lead your industry<br/>with AI?</h2>
+        <p style="font-size:16px;color:rgba(255,255,255,.7);max-width:460px;line-height:1.7;">30-minute strategy session with one of our AI transformation principals. No pitch decks — just an honest conversation about where AI can take you.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;flex-shrink:0;">
+        <a href="mailto:hello@bigtechconsulting.com" class="btn-w">Book a Strategy Call →</a>
+        <a href="/tools/ai-maturity-assessment" style="color:rgba(255,255,255,.7);text-align:center;font-size:13px;font-weight:500;">Or take the free AI Assessment first</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fg">
+      <div class="fbrand">
+        <span class="nav-brand" style="color:#fff;">Bigtech<span>Consulting</span></span>
+        <p>Enterprise AI transformation — strategy, governance, security, and execution. Powered by SIXXAB AI.</p>
+      </div>
+      <div class="fcol">
+        <h5>Services</h5>
+        <a href="/services/ai-strategy">AI Strategy</a>
+        <a href="/services/ai-governance">AI Governance</a>
+        <a href="/services/ai-security">AI Security</a>
+        <a href="/services/responsible-ai">Responsible AI</a>
+        <a href="/services/agentic-platforms">Agentic Platforms</a>
+        <a href="/services/ai-change-management">Change Management</a>
+      </div>
+      <div class="fcol">
+        <h5>Verticals</h5>
+        <a href="/verticals/financial-services">Financial Services</a>
+        <a href="/verticals/healthcare">Healthcare</a>
+        <a href="/verticals/manufacturing">Manufacturing</a>
+        <h5 style="margin-top:20px;">Insights</h5>
+        <a href="/blog">All Articles</a>
+      </div>
+      <div class="fcol">
+        <h5>Tools</h5>
+        <a href="/tools/ai-maturity-assessment">AI Maturity Assessment</a>
+        <h5 style="margin-top:20px;">Company</h5>
+        <a href="/#contact">Contact</a>
+        <a href="https://startupsinabox.com" target="_blank">SIXXAB AI Platform</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2026 BigtechConsulting. All rights reserved.</p>
+      <p>Powered by <a href="https://startupsinabox.com" style="color:rgba(255,255,255,.5);">SIXXAB AI</a> — startupsinabox.com</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
