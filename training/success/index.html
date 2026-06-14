@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>AI Transformation Programs &#8212; BigtechConsulting</title>
-<meta name="description" content="Full-lifecycle transformation programs embedding AI into workflows, culture, and operating models &#8212; from pilot to production."/>
+<title>Enrollment Confirmed — BigtechConsulting &#8212; BigtechConsulting</title>
+<meta name="description" content="Your AI training enrollment is confirmed."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -304,7 +304,41 @@ a{text-decoration:none;color:inherit;}
   .cbi{flex-direction:column;align-items:flex-start;}
   .pg{grid-template-columns:1fr;}
 }
+
+/* TRAINING PAGE EXTRAS */
+.plan-card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:36px;position:relative;transition:border-color .2s,box-shadow .2s;}
+.plan-card:hover{border-color:var(--teal);box-shadow:0 4px 24px rgba(13,148,136,.1);}
+.plan-card.featured{border:2px solid var(--teal);}
+.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
+.plan-who{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.plan-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--charcoal);margin-bottom:6px;}
+.plan-price{display:flex;align-items:baseline;gap:4px;margin:16px 0;}
+.plan-amount{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--charcoal);line-height:1;}
+.plan-curr{font-size:22px;color:var(--stone);font-weight:600;}
+.plan-period{font-size:14px;color:var(--stone2);margin-left:4px;}
+.plan-desc{font-size:14px;color:var(--stone);line-height:1.65;margin-bottom:20px;}
+.plan-features{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:8px;}
+.plan-features li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--charcoal);line-height:1.5;}
+.plan-features li::before{content:'&#10003;';color:var(--teal);font-weight:700;font-size:14px;flex-shrink:0;margin-top:1px;}
+.plan-btn{display:block;width:100%;padding:14px;border:none;border-radius:var(--r);font-size:15px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .15s;text-align:center;}
+.plan-btn-primary{background:var(--teal);color:#fff;}
+.plan-btn-primary:hover{background:var(--teald);}
+.plan-btn-outline{background:#fff;color:var(--teal);border:2px solid var(--teal);}
+.plan-btn-outline:hover{background:var(--tealbg);}
+.compare-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);}
+.compare-table th{background:var(--charcoal);color:rgba(255,255,255,.7);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:14px 18px;text-align:left;}
+.compare-table th:not(:first-child){text-align:center;}
+.compare-table td{padding:13px 18px;font-size:14px;color:var(--charcoal);border-bottom:1px solid var(--border);}
+.compare-table td:not(:first-child){text-align:center;}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table tr:hover td{background:var(--cream);}
+.chk{color:var(--teal);font-weight:700;font-size:16px;}
+.xmk{color:var(--stone3);font-size:16px;}
+.strategy-card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;border-top:4px solid var(--teal);}
+.strategy-card.amber-t{border-top-color:var(--amber);}
+.strategy-card.green-t{border-top-color:var(--green);}
 </style>
+
 </head>
 <body>
 <nav class="nav">
@@ -316,6 +350,7 @@ a{text-decoration:none;color:inherit;}
     <ul class="nav-links">
       <li><a href="/#services">Services</a></li>
       <li><a href="/#verticals">Verticals</a></li>
+      <li><a href="/training/">AI Training</a></li>
       <li><a href="/blog/">Insights</a></li>
       <li><a href="/tools/ai-maturity-assessment/">Free Assessment</a></li>
     </ul>
@@ -323,90 +358,53 @@ a{text-decoration:none;color:inherit;}
   </div>
 </nav>
 
-<section style="padding:148px 0 84px;background:linear-gradient(150deg,#fff 60%,#F0FDFA 100%);overflow:hidden;">
-  <div class="wrap">
-    <a href="/">Home</a><div class="bc-nav"><span class="sep">/</span><a href="/#services">Services</a><div class="bc-nav"><span class="sep">/</span><span>AI Transformation Programs</span></div>
-    <span class="ov">Enterprise AI Practice</span>
-    <h1 class="d1" style="max-width:780px;margin-bottom:20px;">AI Transformation Programs</h1>
-    <p class="lead" style="margin-bottom:36px;">Full-lifecycle transformation programs embedding AI into workflows, culture, and operating models &#8212; from pilot to production.</p>
-    <div style="display:flex;gap:14px;flex-wrap:wrap;">
-      <a href="/#contact" class="bt bt-teal">Book a Consultation</a>
-      <a href="/tools/ai-maturity-assessment/" class="bt bt-out">Free AI Assessment</a>
-    </div>
-  </div>
-</section>
-<section class="sec lt">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 280px;gap:52px;align-items:start;">
-      <div>
-        <span class="ov">What We Deliver</span>
-        <h2 class="d2" style="margin-bottom:36px;">What Is Included</h2>
-        <div class="g3" style="grid-template-columns:1fr 1fr;gap:18px;margin-bottom:40px;">
-          <div class="card"><h3>Discovery &amp; Assessment</h3><p>Deep-dive into your current state, capability gaps, and strategic objectives. All findings documented with prioritised recommendations.</p><span class="tag tg-teal">Week 1&#8211;2</span></div>
-          <div class="card"><h3>Strategy &amp; Roadmap</h3><p>Co-created transformation roadmap with milestones, ownership, dependencies, and success metrics. Board-ready presentation included.</p><span class="tag tg-amb">Week 3&#8211;4</span></div>
-          <div class="card"><h3>Implementation Support</h3><p>Hands-on delivery support through the first implementation sprint. We stay engaged until you have evidence the program is generating measurable value.</p><span class="tag tg-grn">Ongoing</span></div>
-          <div class="card"><h3>Powered by SIXXAB AI</h3><p>Your strategy runs in your business from day one &#8212; backed by SIXXAB AI at startupsinabox.com, the autonomous business platform.</p><span class="tag tg-teal">Platform</span></div>
-        </div>
-      </div>
-      <div style="position:sticky;top:84px;">
-        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:20px;"><h4 style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:4px;">Other Services</h4><a href="/services/ai-strategy/" style="display:block;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:var(--charcoal);text-decoration:none;">AI Strategy &#8594;</a><a href="/services/ai-governance/" style="display:block;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:var(--charcoal);text-decoration:none;">AI Governance &#8594;</a><a href="/services/ai-security/" style="display:block;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:var(--charcoal);text-decoration:none;">AI Security &#8594;</a><a href="/services/ai-architecture/" style="display:block;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:var(--charcoal);text-decoration:none;">AI Architecture &#8594;</a><a href="/services/agentic-platforms/" style="display:block;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:var(--charcoal);text-decoration:none;">Agentic Platforms &#8594;</a></div>
-        <div style="background:var(--charcoal);border-radius:var(--rl);padding:24px;">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px;">Book a Strategy Call</div>
-          <p style="font-size:13px;color:rgba(255,255,255,.52);margin-bottom:16px;">30 minutes with an AI transformation principal. No pitch decks.</p>
-          <a href="/#contact" class="bt bt-teal" style="display:block;text-align:center;font-size:14px;">Book Now &#8594;</a>
-          <div style="margin-top:12px;"><a href="/tools/ai-maturity-assessment/" style="display:block;text-align:center;font-size:13px;color:rgba(255,255,255,.5);padding:8px;">Free AI Maturity Assessment</a></div>
-        </div>
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;padding-top:100px;">
+  <div style="max-width:520px;">
+    <div style="font-size:72px;margin-bottom:20px;">&#127881;</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--charcoal);margin-bottom:14px;">You&#8217;re enrolled!</h1>
+    <p style="font-size:17px;color:var(--stone);line-height:1.72;margin-bottom:28px;">Payment confirmed. You&#8217;ll receive your training access details at your email address within 1 hour.</p>
+    <div style="background:var(--tealbg);border-radius:var(--rl);padding:24px;margin-bottom:28px;text-align:left;">
+      <h4 style="font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:10px;">What happens next:</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:14px;color:var(--teald);">&#10003; Check your email for login credentials</div>
+        <div style="font-size:14px;color:var(--teald);">&#10003; WhatsApp welcome message will arrive shortly</div>
+        <div style="font-size:14px;color:var(--teald);">&#10003; Your SIXXAB AI platform access will be activated</div>
+        <div style="font-size:14px;color:var(--teald);">&#10003; Live session calendar invite will be sent (Professional &amp; Executive plans)</div>
       </div>
     </div>
-  </div>
-</section>
-<section class="sec dk">
-  <div class="wrap">
-    <span class="ov" style="color:var(--teal2);">Why BigtechConsulting</span>
-    <h2 class="d2 d2-wh" style="margin-bottom:40px;">The Difference Is <em>in the Depth</em></h2>
-    <div class="wg">
-      <div class="wc wt"><div class="wn">9+</div><h4>Years AI Expertise</h4><p>Dedicated AI practice since the deep learning revolution &#8212; not a technology pivot.</p></div>
-      <div class="wc wd"><div class="wn">350+</div><h4>Certified Practitioners</h4><p>Every engagement led by practitioners with real production AI experience.</p></div>
-      <div class="wc wa"><div class="wn">4wk</div><h4>Rapid Time to Value</h4><p>Pre-built accelerators cut time-to-first-outcome by 60% versus traditional consulting.</p></div>
-      <div class="wc wl"><div class="wn">100%</div><h4>Vendor Agnostic</h4><p>We recommend what is right for your business, not what earns the biggest referral fee.</p></div>
+    <p style="font-size:14px;color:var(--stone);margin-bottom:20px;">Questions? Reach us directly:</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
+      <a href="mailto:sunil.kattikar@gmail.com" class="bt bt-teal" style="font-size:14px;">Email Us</a>
+      <a href="tel:+13036617869" class="bt bt-out" style="font-size:14px;">+1 303 661 7869 (US)</a>
+      <a href="tel:+918600020434" class="bt bt-out" style="font-size:14px;">+91 8600020434 (India)</a>
     </div>
+    <a href="/" style="font-size:14px;color:var(--teal);font-weight:600;">&#8592; Back to BigtechConsulting</a>
   </div>
-</section>
-<section class="sec cb">
-  <div class="wrap">
-    <div class="cbi">
-      <div>
-        <h2 class="d2 d2-wh" style="margin-bottom:10px;">Ready to get started?</h2>
-        <p style="color:rgba(255,255,255,.8);font-size:16px;max-width:440px;">Book a 30-minute strategy call with a BigtechConsulting AI specialist.</p>
-      </div>
-      <a href="/#contact" class="bt bt-white">Book a Call &#8594;</a>
-    </div>
-  </div>
-</section>
+</div>
 <footer class="footer">
   <div class="wrap">
     <div class="fg2">
       <div class="fb">
         <span class="flogo">Bigtech<span>Consulting</span></span>
         <p>Enterprise AI transformation &#8212; strategy, governance, security, and execution. Powered by SIXXAB AI.</p>
-        <div style="margin-top:12px;">
-          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:3px;"><a href="mailto:sunil.kattikar@gmail.com" style="color:rgba(255,255,255,.55);">sunil.kattikar@gmail.com</a></div>
-          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:2px;"><a href="tel:+13036617869" style="color:rgba(255,255,255,.55);">+1 303 661 7869 (US)</a></div>
-          <div style="font-size:12px;color:rgba(255,255,255,.45);"><a href="tel:+918600020434" style="color:rgba(255,255,255,.55);">+91 8600020434 (India)</a></div>
+        <div style="margin-top:16px;">
+          <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:4px;">&#9993; <a href="mailto:sunil.kattikar@gmail.com" style="color:rgba(255,255,255,.6);">sunil.kattikar@gmail.com</a></div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:2px;">&#9742; <a href="tel:+13036617869" style="color:rgba(255,255,255,.6);">+1 303 661 7869</a> (US)</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);">&#9742; <a href="tel:+918600020434" style="color:rgba(255,255,255,.6);">+91 8600020434</a> (India)</div>
         </div>
       </div>
       <div class="fc"><h5>All Services</h5><a href="/services/ai-strategy/">AI Strategy</a><a href="/services/ai-governance/">AI Governance</a><a href="/services/ai-transformation/">AI Transformation</a><a href="/services/ai-security/">AI Security</a><a href="/services/ai-architecture/">AI Architecture</a><a href="/services/agentic-platforms/">Agentic Platforms</a><a href="/services/ai-ops/">AI Ops</a><a href="/services/ai-cost-optimization/">AI Cost Optimisation</a><a href="/services/ai-change-management/">AI Change Management</a><a href="/services/responsible-ai/">Responsible AI</a><a href="/services/ai-data-strategy/">AI Data Strategy</a><a href="/services/ai-roi/">AI ROI Design</a></div>
       <div class="fc">
-        <h5>Verticals</h5><a href="/verticals/financial-services/">Financial Services</a><a href="/verticals/healthcare/">Healthcare &amp; Life Sciences</a><a href="/verticals/manufacturing/">Manufacturing &amp; Supply Chain</a>
-        <h5 style="margin-top:16px;">Insights (1&#8211;6)</h5><a href="/blog/why-ai-projects-fail/">Why 68% of Enterprise AI Projects Neve...</a><a href="/blog/responsible-ai/">What the EU AI Act Actually Requires o...</a><a href="/blog/agentic-ai/">Agentic AI Explained: What It Is and H...</a><a href="/blog/ai-governance/">The Complete AI Governance Framework f...</a><a href="/blog/ai-architecture/">The Enterprise AI Architecture Referen...</a><a href="/blog/ai-cost-optimization/">How to Cut Your AI Inference Costs by ...</a>
+        <h5>Verticals</h5><a href="/verticals/financial-services/">Financial Services</a><a href="/verticals/healthcare/">Healthcare & Life Sciences</a><a href="/verticals/manufacturing/">Manufacturing & Supply Chain</a>
+        <h5 style="margin-top:16px;">AI Training</h5>
+        <a href="/training/">All Plans</a>
+        <a href="/training/#retail">Retail Plan — $199</a>
+        <a href="/training/#corporate">Corporate Plan — $500</a>
+        <a href="/training/#enterprise">Business Plan — $1,500</a>
+        <h5 style="margin-top:16px;">Insights</h5><a href="/blog/why-ai-projects-fail/">Why 68% of Enterprise AI Projects Neve...</a><a href="/blog/responsible-ai/">What the EU AI Act Actually Requires o...</a><a href="/blog/agentic-ai/">Agentic AI Explained: What It Is and H...</a><a href="/blog/ai-governance/">The Complete AI Governance Framework f...</a><a href="/blog/ai-architecture/">The Enterprise AI Architecture Referen...</a><a href="/blog/ai-cost-optimization/">How to Cut Your AI Inference Costs by ...</a>
       </div>
       <div class="fc">
-        <h5>Insights (7&#8211;12)</h5><a href="/blog/ai-security/">AI Security in 2026: The Threat Landsc...</a><a href="/blog/sixxab-validate/">Phase 1 Validate: Test Your Business I...</a><a href="/blog/sixxab-launch/">Phase 2 Launch: Build Your GTM Engine ...</a><a href="/blog/ai-maturity-guide/">The 5-Level AI Maturity Model: Where I...</a><a href="/blog/ai-financial-services/">AI in Financial Services: The 2026 Gui...</a><a href="/blog/vendor-landscape/">The Enterprise AI Vendor Landscape 202...</a>
-        <h5>AI Training</h5>
-        <a href="/training/">All Plans</a>
-        <a href="/training/#retail">Retail &#8212; $199</a>
-        <a href="/training/#corporate">Corporate &#8212; $500</a>
-        <a href="/training/#enterprise">Business &#8212; $1,500</a>
+        <h5>More Insights</h5><a href="/blog/ai-security/">AI Security in 2026: The Threat Landsc...</a><a href="/blog/sixxab-validate/">Phase 1 Validate: Test Your Business I...</a><a href="/blog/sixxab-launch/">Phase 2 Launch: Build Your GTM Engine ...</a><a href="/blog/ai-maturity-guide/">The 5-Level AI Maturity Model: Where I...</a><a href="/blog/ai-financial-services/">AI in Financial Services: The 2026 Gui...</a><a href="/blog/vendor-landscape/">The Enterprise AI Vendor Landscape 202...</a>
         <h5 style="margin-top:16px;">Tools</h5>
         <a href="/tools/ai-maturity-assessment/">AI Maturity Assessment</a>
         <a href="/#contact">Contact Us</a>
@@ -414,7 +412,7 @@ a{text-decoration:none;color:inherit;}
       </div>
     </div>
     <div class="fbot">
-      <p>&copy; 2026 BigtechConsulting. All rights reserved.</p>
+      <p>&copy; 2026 BigtechConsulting. All rights reserved. Serving USA &amp; India.</p>
       <p>Powered by <a href="https://startupsinabox.com" style="color:rgba(255,255,255,.42);">SIXXAB AI</a></p>
     </div>
   </div>
